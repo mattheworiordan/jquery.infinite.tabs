@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'rubygems'
+  require 'sass'
+  require 'yui/compressor'
+  require 'zlib'
+rescue LoadError => err
+  puts <<-EOF
+  The SASS and YUI compressor gems are required to execute this build script
+  Run: gem install sass && gem install yui-compressor.
+EOF
+  exit
+end
+
+puts 'Building CSS from SCSS'
+`sass css/infinite.tabs.scss:css/infinite.tabs.css`
+
+puts 'Building minified CSS'
+css_compressor = YUI::CssCompressor.new
+%w(css/infinite.tabs.css css/infinite.tabs.lteqie8.css).each do |css_file|
+  File.open(css_file, 'r') do |source|
+    css_compressor.compress(source) do |compressed|
+      Zlib::GzipWriter.open(css_file.gsub(/\.css/, '.min.css.gz')) do |gzip|
+        File.open(css_file.gsub(/\.css/, '.min.css'), 'w') do |min_css|
+          while buffer = compressed.read(4096)
+            min_css.write(buffer)
+            gzip.write(buffer)
+          end
+        end
+        gzip.close
+      end
+    end
+  end
+end
+
+puts 'Building minified Javascript'
+compressor = YUI::JavaScriptCompressor.new
+File.open('jquery.infinite.tabs.js', 'r') do |source|
+  compressor.compress(source) do |compressed|
+    Zlib::GzipWriter.open('jquery.infinite.tabs.min.js.gz') do |gzip|
+      File.open('jquery.infinite.tabs.min.js', 'w') do |min_js|
+        while buffer = compressed.read(4096)
+          min_js.write(buffer)
+          gzip.write(buffer)
+        end
+      end
+      gzip.close
+    end
+  end
+end

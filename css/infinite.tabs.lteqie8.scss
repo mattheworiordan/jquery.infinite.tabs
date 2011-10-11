@@ -1,0 +1,31 @@
+ul.infinite-tabs {
+  li {
+    &:before, &:after, a:before, a:after {
+      display: none;
+    }
+    &.active {
+      &:before, &:after, a:before, a:after {
+        display: none;
+      }
+    }
+
+    &.scroller {
+      li {
+        &:before, &:after, a:before, a:after {
+          display: none;
+        }
+        &.active {
+          &:before, &:after, a:before, a:after {
+            display: none;
+          }
+        }
+      }
+    }
+
+    &.overlay {
+      a {
+        border-right-width: 1px;
+      }
+    }
+  }
+}
