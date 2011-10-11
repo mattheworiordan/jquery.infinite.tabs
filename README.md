@@ -17,6 +17,10 @@ Example
 -------
 [http://mattheworiordan.com/projects/jquery.infinite.tabs.js/example.min.html](http://mattheworiordan.com/projects/jquery.infinite.tabs.js/example.min.html)
 
+Screen shot
+-----------
+![image](https://github.com/mattheworiordan/jquery.infinite.tabs/raw/master/screen-shot.png)
+
 Usage
 -----
 
