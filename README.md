@@ -13,6 +13,9 @@ Features
  - All style sheets are constructed with SASS/SCSS so you can either change the variables in the SCSS and regenerate your own CSS files, or you can simply override or modify the CSS files directly.
  - All CSS & JQuery files are minified and Gzipped down to just over 2k.
 
+Example
+-------
+[http://mattheworiordan.com/projects/jquery.infinite.tabs.js/example.min.html](http://mattheworiordan.com/projects/jquery.infinite.tabs.js/example.min.html)
 
 Usage
 -----
