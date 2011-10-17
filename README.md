@@ -31,7 +31,7 @@ Include CSS link to css/infinite.tabs.min.css in your HTML within the head.  Ple
 All tab lists must be ul (unordered lists) with the class "infinite-tabs".  Example to follow:
 
     // set up the tab system
-    $("ul.infinite-tabs#target").activateInfiniteTabs()
+    $("ul.infinite-tabs#target").infiniteTabs()
       .find('li').click(function(e) {
         e.preventDefault();
         e.stopPropagation();
