@@ -132,7 +132,7 @@ ul.infinite-tabs {
       background: #ddc385; }
     ul.infinite-tabs li:nth-child(2n+1).active a:after, ul.infinite-tabs li:nth-child(2n+1).active a:before {
       background: #e8d7ad; }
-    ul.infinite-tabs li:first-child.active a:before, ul.infinite-tabs li:last-child.active a:after {
+    ul.infinite-tabs li:first-child.active a:before, ul.infinite-tabs li:last-child.active a:after, ul.infinite-tabs li.absolute-last.active a:after {
       background: #222222; }
     ul.infinite-tabs li.scroller:after, ul.infinite-tabs li.scroller:before {
       display: none; }
