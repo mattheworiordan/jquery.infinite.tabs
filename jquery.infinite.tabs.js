@@ -65,11 +65,13 @@
         scrollableTabOffset = 0,
         windowWidth = $(window).width(),
         scrollerWidth,
-        nav;
+        nav,
+        lastPinnedTab;
 
     // move non-fixed tabs into the scroller ul
     moveNonFixedTabsToScroller(this, scrollableTabs, scroller);
-    scrollerWidth = $(this).innerWidth() - scroller.position().left;
+    lastPinnedTab = $(this).find('>li:not(.navigation):not(.scroller):last');
+    scrollerWidth = $(this).innerWidth() - lastPinnedTab.offset().left - lastPinnedTab.width();
 
     // add navigation for tabs to DOM regardless of whether we need it
     nav = addNav(this);
@@ -110,6 +112,13 @@
 
     // add reference to the ul.infinite-tabs DOM element so it can be called by the plugin command
     $(this).data('positionNavFunction', positionNavFunction);
+
+    // allow external influences to effect private scrollerWidth
+    $(this).data('resetScrollerWidth', function() {
+      var lastPinnedTab = $(that).find('>li:not(.navigation):not(.scroller):last');
+      scrollerWidth = $(that).innerWidth() - lastPinnedTab.offset().left - lastPinnedTab.width();
+      scroller.find('div').css('width', (scrollerWidth-20) + 'px');
+    });
 
     // resize scroller area when window resizes
     $(window).resize(function(e) {
@@ -261,6 +270,7 @@
   // check that navigation is showing if scrolling is needed, fix any other elements dependent upon positions
   function adjustToFit() {
     if ($(this).is('ul.infinite-tabs')) {
+      $(this).data('resetScrollerWidth')();
       $(this).data('positionNavFunction')();
     }
   }
